@@ -77,13 +77,36 @@ def open_image (file, x0, x1, y0, y1, level) :
 
     t = czi.size
     c = t[2]
-
-    image = np.zeros((y1-y0,x1-x0,3),dtype=float)
+    x = t[5]
+    y = t[4]
 
     L = get_the_wavelength(c)
 
-    for k in range (0,c):
-        mosaic_data = czi.read_mosaic((x0,y0,x1-x0,y1-y0),scale_factor=level, C=k)
+    mosaic_data = czi.read_mosaic((x0,y0,x1-x0,y1-y0), scale_factor=level, C=0)
+    mosaic_data = mosaic_data[0,:,:]
+    c1 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
+    c2 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
+    c3 = (norm_by(mosaic_data, 0, 100) * 255).astype(np.uint8)
+    rgb = np.stack((c1, c2, c3), axis=2)
+
+# On recolore
+    im_shape = np.array(rgb.shape)
+    color_transform = np.array(L[0]).T
+    im_reshape = rgb.reshape([np.prod(im_shape[0:2]), im_shape[2]]).T
+    im_recolored = np.matmul(color_transform.T, im_reshape).T
+    im_shape[2] = 3
+    rgb = im_recolored.reshape(im_shape)
+    mosaic_data = np.clip(rgb, 0, 255)
+    mosaic_dataf = mosaic_data.astype(float) / 255.
+
+    (x, y, v) = mosaic_dataf.shape
+
+    image = np.zeros((x,y,3),dtype=float)
+
+    image += mosaic_dataf
+
+    for k in range (1,c):
+        mosaic_data = czi.read_mosaic((x0,y0,x1-x0,y1-y0), scale_factor=level, C=k)
         mosaic_data = mosaic_data[0,:,:]
         c1 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
         c2 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
@@ -95,7 +118,7 @@ def open_image (file, x0, x1, y0, y1, level) :
         color_transform = np.array(L[k]).T
         im_reshape = rgb.reshape([np.prod(im_shape[0:2]), im_shape[2]]).T
         im_recolored = np.matmul(color_transform.T, im_reshape).T
-        im_shape[2] = 3 #On a maintenant 3 couleurs RGB
+        im_shape[2] = 3
         rgb = im_recolored.reshape(im_shape)
         mosaic_data = np.clip(rgb, 0, 255)
         mosaic_dataf = mosaic_data.astype(float) / 255.

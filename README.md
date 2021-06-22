@@ -11,7 +11,7 @@ You can install it with `pip install`. When you are in your terminal , just use 
 
 # Documentation
 
-Its documentation is available on <>.
+Its documentation is available on <https://github.com/LRobach/kill_openslide_fluo>.
 
 # Current issue
 
