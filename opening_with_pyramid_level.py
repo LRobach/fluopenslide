@@ -80,7 +80,7 @@ def open_image (file, x0, x1, y0, y1, level) :
     x = t[5]
     y = t[4]
 
-    L = get_the_wavelength(c)
+    L = get_the_wavelength(file, c)
 
     mosaic_data = czi.read_mosaic((x0,y0,x1-x0,y1-y0), scale_factor=level, C=0)
     mosaic_data = mosaic_data[0,:,:]

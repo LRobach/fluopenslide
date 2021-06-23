@@ -18,7 +18,7 @@ def size (file) -> Tuple [int, int] :
 
     Example
     ---------
-    file = 'NVA_19-011.IMMVESSC1V5_20T002404-04.czi'
+    file = '/Users/louisonrobach/Documents/renom.czi'
 
     Return
     ---------
@@ -32,11 +32,7 @@ def size (file) -> Tuple [int, int] :
 
     root = czi.meta
     superroot = ElementTree(root)
-    with open("meta.xml", "w") as f:
-        superroot.write(f, encoding='unicode')
-
-    tree = ET.parse('meta.xml')
-    root = tree.getroot()
+    root = superroot.getroot()
 
     for child in root[0][4][3]:
         if child.tag=="SizeX" or child.tag=="SizeY":

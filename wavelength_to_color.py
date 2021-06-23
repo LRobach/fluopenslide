@@ -69,7 +69,7 @@ def WavelengthToColor (wavelength) :
     return([red, 0, 0], [0, green, 0], [0, 0, blue])
 
 
-def get_the_wavelength (c):
+def get_the_wavelength (file, c):
     """
     Gives the RGB color of each channel.
 
@@ -77,15 +77,19 @@ def get_the_wavelength (c):
     ---------
     c : int
         Number of channels present in the file.
-        
+
     Return
     ---------
     L : List
         The list composed of the RGB colors of each channels.
 
     """
-    tree = ET.parse('meta.xml')
-    root = tree.getroot()
+    mosaic_file = pathlib.Path(file)
+    czi = aicspylibczi.CziFile(mosaic_file)
+    root = czi.meta
+    superroot = ElementTree(root)
+    root = superroot.getroot()
+    
     L = []
 
     for k in range(0,c):
