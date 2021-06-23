@@ -78,8 +78,14 @@ def get_the_wavelength (file, c):
 
     Parameter
     ---------
+    file : str
+       The path to your czi file.
     c : int
         Number of channels present in the file.
+
+    Example
+    ---------
+    file = '/Users/louisonrobach/Documents/renom.czi'
 
     Return
     ---------

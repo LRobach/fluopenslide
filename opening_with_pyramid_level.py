@@ -42,9 +42,9 @@ def edges (image, x, y) :
     return(image)
 
 
-def open_image (file, x0, x1, y0, y1, level) :
+def get_array (file, x0, x1, y0, y1, level) :
     """
-    Display the image wanted with the read_mosaic function. With this function, you are able to choose the pyramid level.
+    Gives the numpy array wanted with the read_mosaic function. With this function, you are able to choose the pyramid level.
 
     Parameters
     ---------
@@ -67,7 +67,7 @@ def open_image (file, x0, x1, y0, y1, level) :
 
     Return
     ---------
-    An image created by matplotlib corresponding to the image wanted.
+    An array corresponding to the image wanted.
     """
 
     mosaic_file = pathlib.Path(file)
@@ -128,7 +128,4 @@ def open_image (file, x0, x1, y0, y1, level) :
         image += mosaic_dataf
 
     image /= 3.
-
-    plt.imshow(image)
-    plt.axis('on')
-    plt.show()
+    return(image)

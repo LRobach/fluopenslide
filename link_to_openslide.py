@@ -1,7 +1,7 @@
-from opening_with_pyramid_level import open_image
+from opening_with_pyramid_level import get_array
 import pathlib
 import aicspylibczi
-
+from position_to_tile import size
 
 class KillOpenSlide() :
     """
@@ -21,6 +21,15 @@ class KillOpenSlide() :
         """
         self.path = file
 
+    def data (self) :
+        """
+        Gives information about the file. Returns a list : [[SizeX, SizeY], number of tiles, [tileSizeX, tileSizeY]].
+
+        """
+        mosaic_file = pathlib.Path(self.path)
+        czi = aicspylibczi.CziFile(mosaic_file)
+        t = czi.size
+        return([size(self.path), t[3], [t[5], t[4]]])
 
     def read_region (self, location, level, size) :
         """
@@ -35,13 +44,9 @@ class KillOpenSlide() :
         size = (width, height) : tuple
             tuple giving the size of the image.
 
-        Return
-        ---------
-        The image wanted.
-
         """
 
         (x, y) = location
         (w, h) = size
 
-        return(open_image (self.path, x, x+w, y, y+h, level/(2**level)) # On suppose que le niveau le plus haut de la pyramide est 8.
+        return (get_array (self.path, x, x+w, y, y+h, level/(2**level)))
