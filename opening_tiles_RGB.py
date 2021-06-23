@@ -44,7 +44,7 @@ def recolor_tile (file, n) :
     x = t[5]
     y = t[4]
 
-    L = get_the_wavelength(c)
+    L = get_the_wavelength(file, c)
 
     image=np.zeros((x,y,3),dtype=float)
 

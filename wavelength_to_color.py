@@ -1,6 +1,9 @@
 "Gives the RGB color given by the wavelength."
 
 import xml.etree.ElementTree as ET
+from xml.etree.ElementTree import ElementTree
+import pathlib
+import aicspylibczi
 
 def WavelengthToColor (wavelength) :
     """
@@ -89,7 +92,7 @@ def get_the_wavelength (file, c):
     root = czi.meta
     superroot = ElementTree(root)
     root = superroot.getroot()
-    
+
     L = []
 
     for k in range(0,c):
