@@ -70,13 +70,12 @@ def tiles_to_open (file, x0, x1, y0, y1) -> List :
     mosaic_file = pathlib.Path(file)
     czi = aicspylibczi.CziFile(mosaic_file)
 
-    # On suppose que tous les fichiers à ouvrir ont la dim : 'HSCMYX'
-
+    # We supposed the dimensions of each file to open is : 'HSCMYX'
     t = czi.size
     pix = t[5]
     piy = t[4]
     [SizeX, SizeY] = size(file)
-    column0 = x0//pix  # partie entière sup
+    column0 = x0//pix  
     column1 = x1//pix
     line0 = y0//piy
     line1 = y1//piy

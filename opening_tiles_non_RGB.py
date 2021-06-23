@@ -30,8 +30,7 @@ def creates_numpy_array (file, n) :
     mosaic_file = pathlib.Path(file)
     czi = aicspylibczi.CziFile(mosaic_file)
 
-    # On suppose que tous les fichiers à ouvrir ont la dim : 'HSCMYX'
-
+    # We supposed the dimensions of each file to open is : 'HSCMYX'
     t = czi.size
     c = t[2]
     x = t[5]
@@ -41,7 +40,7 @@ def creates_numpy_array (file, n) :
 
     for k in range (0,c):
         tuple_mosaic_data = czi.read_image(M=n, C=k, S=0, H=0)
-        mosaic_data = tuple_mosaic_data[0] #on sélectionne uniquement le numpy.ndarray du tuple
+        mosaic_data = tuple_mosaic_data[0] # We want only the numpy.darray and it is a tuple
         mosaic_data = mosaic_data[0,0,0,0,:,:]
         image += mosaic_data
 

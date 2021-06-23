@@ -37,7 +37,7 @@ def recolor_tile (file, n) :
     mosaic_file = pathlib.Path(file)
     czi = aicspylibczi.CziFile(mosaic_file)
 
-    # On suppose que tous les fichiers à ouvrir ont la dim : 'HSCMYX'
+    # We supposed the dimensions of each file to open is : 'HSCMYX'
 
     t = czi.size
     c = t[2]
@@ -50,7 +50,7 @@ def recolor_tile (file, n) :
 
     for k in range (0,c):
         tuple_mosaic_data = czi.read_image(M=n, C=k, S=0, H=0)
-        mosaic_data = tuple_mosaic_data[0] #on sélectionne uniquement le numpy.ndarray du tuple
+        mosaic_data = tuple_mosaic_data[0] # We want only the numpy.darray and it is a tuple
         mosaic_data = mosaic_data[0,0,0,0,:,:]
         c1 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
         c2 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
@@ -71,7 +71,7 @@ def recolor_tile (file, n) :
 
         image += mosaic_dataf
 
-# On réalise une moyenne des couleurs pour supperposer correctement les couleurs sur les pixels ou plusieurs couches se superposent
+# We are making an average color to realize a correct superimposition of colors
     image /= 3.
 
     return(image)
@@ -192,7 +192,7 @@ def size_from_tiles (file, x0, x1, y0, y1) :
     mosaic_file = pathlib.Path(file)
     czi = aicspylibczi.CziFile(mosaic_file)
 
-    # On suppose que tous les fichiers à ouvrir ont la dim : 'HSCMYX'
+    # We supposed the dimensions of each file to open is : 'HSCMYX'
     t = czi.size
     pix = t[5]
     piy = t[4]

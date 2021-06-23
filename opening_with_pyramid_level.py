@@ -73,8 +73,7 @@ def get_array (file, x0, x1, y0, y1, level) :
     mosaic_file = pathlib.Path(file)
     czi = aicspylibczi.CziFile(mosaic_file)
 
-    # On suppose que tous les fichiers à ouvrir ont la dim : 'HSCMYX'
-
+    # We supposed the dimensions of each file to open is : 'HSCMYX'
     t = czi.size
     c = t[2]
     x = t[5]
@@ -89,7 +88,7 @@ def get_array (file, x0, x1, y0, y1, level) :
     c3 = (norm_by(mosaic_data, 0, 100) * 255).astype(np.uint8)
     rgb = np.stack((c1, c2, c3), axis=2)
 
-# On recolore
+# We recolor
     im_shape = np.array(rgb.shape)
     color_transform = np.array(L[0]).T
     im_reshape = rgb.reshape([np.prod(im_shape[0:2]), im_shape[2]]).T
@@ -113,7 +112,7 @@ def get_array (file, x0, x1, y0, y1, level) :
         c3 = (norm_by(mosaic_data, 0, 100) * 255).astype(np.uint8)
         rgb = np.stack((c1, c2, c3), axis=2)
 
-    # On recolore
+    # We recolor
         im_shape = np.array(rgb.shape)
         color_transform = np.array(L[k]).T
         im_reshape = rgb.reshape([np.prod(im_shape[0:2]), im_shape[2]]).T
