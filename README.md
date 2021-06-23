@@ -7,7 +7,7 @@ It is mainly based on the aicspylibczi library, whom documentation is available 
 
 # Installation
 
-You can install it with `pip install`. When you are in your terminal , just use `pip install kill_openslide_fluo` and it will install the whole library. You can then use it at your convenience.
+You can install it directly from GitHut by downloading it here : <https://github.com/LRobach/kill_openslide_fluo/archive/refs/heads/master.zip>.
 
 # Documentation
 
