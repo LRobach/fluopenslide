@@ -1,4 +1,5 @@
-" By giving position, width, height in pixels, you have access to the tiles needed to open your flurescence image."
+""" By giving position, width, height in pixels,
+you have access to the tiles needed to open your flurescence image."""
 
 import pathlib
 import aicspylibczi
@@ -7,9 +8,9 @@ import xml.etree.ElementTree as ET
 from typing import Tuple, List
 
 
-def size (file) -> Tuple [int, int] :
+def size(file) -> Tuple[int, int]:
     """
-    Finds the dimension of the entire czi image.
+    Find the dimension of the entire czi image.
 
     Parameter
     ---------
@@ -26,7 +27,7 @@ def size (file) -> Tuple [int, int] :
         The size, in pixel, of your entire czi image.
 
     """
-    L=[]
+    L = []
     mosaic_file = pathlib.Path(file)
     czi = aicspylibczi.CziFile(mosaic_file)
 
@@ -35,15 +36,15 @@ def size (file) -> Tuple [int, int] :
     root = superroot.getroot()
 
     for child in root[0][4][3]:
-        if child.tag=="SizeX" or child.tag=="SizeY":
+        if child.tag == "SizeX" or child.tag == "SizeY":
             L.append(float(child.text))
 
     return(L)
 
 
-def tiles_to_open (file, x0, x1, y0, y1) -> List :
+def tiles_to_open(file, x0, x1, y0, y1) -> List:
     """
-    Creates a list with the numbers of tiles to open.
+    Create a list with the numbers of tiles to open.
 
     Parameters
     ---------
@@ -61,7 +62,8 @@ def tiles_to_open (file, x0, x1, y0, y1) -> List :
     Return
     ---------
     L : List
-        A list of numbers representing the tiles to open to get the image wanted.
+        A list of numbers representing the tiles
+        to open to get the image wanted.
 
     """
 
@@ -75,17 +77,17 @@ def tiles_to_open (file, x0, x1, y0, y1) -> List :
     pix = t[5]
     piy = t[4]
     [SizeX, SizeY] = size(file)
-    column0 = x0//pix  
+    column0 = x0//pix
     column1 = x1//pix
     line0 = y0//piy
     line1 = y1//piy
-    nbXtile = SizeX//pix +1
+    nbXtile = SizeX//pix + 1
 
-    for j in range (line0, line1 +1 ) :
-        a = int( column0 + j * nbXtile )
-        b = int( column1 + j * nbXtile )
+    for j in range(line0, line1 + 1):
+        a = int(column0 + j * nbXtile)
+        b = int(column1 + j * nbXtile)
 
-        for k in range (a, b+1) :
+        for k in range(a, b+1):
             L.append(k)
 
     return(L)

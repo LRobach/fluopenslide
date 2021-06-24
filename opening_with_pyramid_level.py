@@ -14,7 +14,7 @@ def norm_by(x, min_, max_):
     return i2
 
 
-def edges (image, x, y) :
+def edges(image, x, y):
     """
     Add zeros to the numpy array if it is an egde array.
 
@@ -30,21 +30,23 @@ def edges (image, x, y) :
     Return
     ---------
     newim : numpy.array
-        The numpy.array with (x,y) size, filled with 0 if image is smaller than newim.
+        The numpy.array with (x,y) size,
+        filled with 0 if image is smaller than newim.
 
     """
 
-    if ( image.shape != (x, y, 3) ) :
-        N = np.zeros ((x, y, 3))
+    if (image.shape != (x, y, 3)):
+        N = np.zeros((x, y, 3))
         (a, b, c) = image.shape
         N[0:a, 0:b] = image
         return (N)
     return(image)
 
 
-def get_array (file, x0, x1, y0, y1, level) :
+def get_array(file, x0, x1, y0, y1, level):
     """
-    Gives the numpy array wanted with the read_mosaic function. With this function, you are able to choose the pyramid level.
+    Give the numpy array wanted with the read_mosaic function.
+    With this function, you are able to choose the pyramid level.
 
     Parameters
     ---------
@@ -81,8 +83,10 @@ def get_array (file, x0, x1, y0, y1, level) :
 
     L = get_the_wavelength(file, c)
 
-    mosaic_data = czi.read_mosaic((x0,y0,x1-x0,y1-y0), scale_factor=level, C=0)
-    mosaic_data = mosaic_data[0,:,:]
+    mosaic_data = czi.read_mosaic(
+        (x0, y0, x1-x0, y1-y0), scale_factor=level, C=0
+    )
+    mosaic_data = mosaic_data[0, :, :]
     c1 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
     c2 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
     c3 = (norm_by(mosaic_data, 0, 100) * 255).astype(np.uint8)
@@ -100,13 +104,15 @@ def get_array (file, x0, x1, y0, y1, level) :
 
     (x, y, v) = mosaic_dataf.shape
 
-    image = np.zeros((x,y,3),dtype=float)
+    image = np.zeros((x, y, 3), dtype=float)
 
     image += mosaic_dataf
 
-    for k in range (1,c):
-        mosaic_data = czi.read_mosaic((x0,y0,x1-x0,y1-y0), scale_factor=level, C=k)
-        mosaic_data = mosaic_data[0,:,:]
+    for k in range(1, c):
+        mosaic_data = czi.read_mosaic(
+            (x0, y0, x1-x0, y1-y0), scale_factor=level, C=k
+        )
+        mosaic_data = mosaic_data[0, :, :]
         c1 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
         c2 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
         c3 = (norm_by(mosaic_data, 0, 100) * 255).astype(np.uint8)

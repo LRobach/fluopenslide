@@ -7,7 +7,7 @@ import pathlib
 import aicspylibczi
 
 
-def creates_numpy_array (file, n) :
+def creates_numpy_array(file, n):
     """
     Open the n tile and creates a numpy array.
 
@@ -24,7 +24,8 @@ def creates_numpy_array (file, n) :
     Return
     ---------
     M : np.array
-        A numpy array that represents the colorization in RGB colors of the n tile.
+        A numpy array that represents the colorization
+        in RGB colors of the n tile.
 
     """
     mosaic_file = pathlib.Path(file)
@@ -36,12 +37,12 @@ def creates_numpy_array (file, n) :
     x = t[5]
     y = t[4]
 
-    image=np.zeros((x,y,3),dtype=float)
+    image = np.zeros((x, y, 3), dtype=float)
 
-    for k in range (0,c):
+    for k in range(0, c):
         tuple_mosaic_data = czi.read_image(M=n, C=k, S=0, H=0)
-        mosaic_data = tuple_mosaic_data[0] # We want only the numpy.darray and it is a tuple
-        mosaic_data = mosaic_data[0,0,0,0,:,:]
+        mosaic_data = tuple_mosaic_data[0]  # We want only the numpy.darray
+        mosaic_data = mosaic_data[0, 0, 0, 0, :, :]
         image += mosaic_data
 
     image /= 3.
@@ -49,9 +50,9 @@ def creates_numpy_array (file, n) :
     return(image)
 
 
-def final_array_2 (file, x0, x1, y0, y1) :
+def final_array_2(file, x0, x1, y0, y1):
     """
-    Creates the final numpy array that contains all tiles colored in RGB.
+    Create the final numpy array that contains all tiles colored in RGB.
 
     Parameters
     ---------
@@ -85,30 +86,30 @@ def final_array_2 (file, x0, x1, y0, y1) :
     L = tiles_to_open(file, x0, x1, y0, y1)
 
     k = 0
-    while ( L[k+1] == L[k]+1  and k < len(L)-2 ) :
+    while (L[k+1] == L[k]+1 and k < len(L)-2):
         k = k+1
     a = k+1
 
-    M=[]
-    N = np.zeros ((int(len(L)/a)*y,a*x,3))
+    M = []
+    N = np.zeros((int(len(L)/a)*y, a*x, 3))
 
-    for i in range (0, int(len(L)/a)) :
-        for j in range (0, a) :
+    for i in range(0, int(len(L)/a)):
+        for j in range(0, a):
             image = creates_numpy_array(file, L[a*i+j])
             M.append(image)
 
     d = 0
-    for i in range (0, int(len(L)/a)*y,y) :
-        for j in range (0, a*x, x) :
+    for i in range(0, int(len(L)/a)*y, y):
+        for j in range(0, a*x, x):
             N[i:i+y, j:j+x] = M[d]
             d += 1
 
     return(N)
 
 
-def creates_non_RGB_array (file, x0, x1, y0, y1) :
+def creates_non_RGB_array(file, x0, x1, y0, y1):
     """
-    Creates the numpy array containing the non RGB image.
+    Create the numpy array containing the non RGB image.
 
     Parameters
     ---------

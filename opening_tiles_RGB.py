@@ -14,7 +14,7 @@ def norm_by(x, min_, max_):
     return i2
 
 
-def recolor_tile (file, n) :
+def recolor_tile(file, n):
     """
     Open the n tile and creates a numpy array colored in RGB.
 
@@ -31,7 +31,8 @@ def recolor_tile (file, n) :
     Return
     ---------
     M : np.array
-        A numpy array that represents the colorization in RGB colors of the n tile.
+        A numpy array that represents the colorization
+         in RGB colors of the n tile.
 
     """
     mosaic_file = pathlib.Path(file)
@@ -46,12 +47,12 @@ def recolor_tile (file, n) :
 
     L = get_the_wavelength(file, c)
 
-    image=np.zeros((x,y,3),dtype=float)
+    image = np.zeros((x, y, 3), dtype=float)
 
-    for k in range (0,c):
+    for k in range(0, c):
         tuple_mosaic_data = czi.read_image(M=n, C=k, S=0, H=0)
-        mosaic_data = tuple_mosaic_data[0] # We want only the numpy.darray and it is a tuple
-        mosaic_data = mosaic_data[0,0,0,0,:,:]
+        mosaic_data = tuple_mosaic_data[0]  # We want only the numpy.darray
+        mosaic_data = mosaic_data[0, 0, 0, 0, :, :]
         c1 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
         c2 = (norm_by(mosaic_data, 50, 99.8) * 255).astype(np.uint8)
         c3 = (norm_by(mosaic_data, 0, 100) * 255).astype(np.uint8)
@@ -77,7 +78,7 @@ def recolor_tile (file, n) :
     return(image)
 
 
-def edges (image, x, y) :
+def edges(image, x, y):
     """
     Add zeros to the numpy array if it is an egde array.
 
@@ -93,21 +94,22 @@ def edges (image, x, y) :
     Return
     ---------
     newim : numpy.array
-        The numpy.array with (x,y) size, filled with 0 if image is smaller than newim.
+        The numpy.array with (x,y) size,
+        filled with 0 if image is smaller than newim.
 
     """
 
-    if ( image.shape != (x, y, 3) ) :
-        N = np.zeros ((x, y, 3))
+    if (image.shape != (x, y, 3)):
+        N = np.zeros((x, y, 3))
         (a, b, c) = image.shape
         N[0:a, 0:b] = image
         return (N)
     return(image)
 
 
-def final_array (file, x0, x1, y0, y1) :
+def final_array(file, x0, x1, y0, y1):
     """
-    Creates the final numpy array that contains all tiles colored in RGB.
+    Create the final numpy array that contains all tiles colored in RGB.
 
     Parameters
     ---------
@@ -141,30 +143,30 @@ def final_array (file, x0, x1, y0, y1) :
     U = tiles_to_open(file, x0, x1, y0, y1)
 
     k = 0
-    while ( U[k+1] == U[k]+1  and k < len(U)-2 ) :
+    while (U[k+1] == U[k]+1 and k < len(U)-2):
         k = k+1
     a = k+1
 
-    M=[]
-    N = np.zeros ((int(len(U)/a)*y,int(a*x),3))
+    M = []
+    N = np.zeros((int(len(U)/a)*y, int(a*x), 3))
 
-    for i in range (0, int(len(U)/a)) :
-        for j in range (0, a) :
+    for i in range(0, int(len(U)/a)):
+        for j in range(0, a):
             image = recolor_tile(file, U[a*i+j])
             M.append(image)
 
     d = 0
-    for i in range (0, int(len(U)/a)*y,y) :
-        for j in range (0, a*x, x) :
+    for i in range(0, int(len(U)/a)*y, y):
+        for j in range(0, a*x, x):
             N[i:i+y, j:j+x] = M[d]
             d += 1
 
     return(N)
 
 
-def size_from_tiles (file, x0, x1, y0, y1) :
+def size_from_tiles(file, x0, x1, y0, y1):
     """
-    Gives the distance from the edge of the tiles where the image is.
+    Give the distance from the edge of the tiles where the image is.
 
     Parameters
     ---------
@@ -186,7 +188,8 @@ def size_from_tiles (file, x0, x1, y0, y1) :
     Return
     ---------
     [x2, x3, y2, y3] : List
-        The list containing the x and y position of the image in the surrounding tiles.
+        The list containing the x and y position of the image
+        in the surrounding tiles.
 
     """
     mosaic_file = pathlib.Path(file)
@@ -197,14 +200,14 @@ def size_from_tiles (file, x0, x1, y0, y1) :
     pix = t[5]
     piy = t[4]
 
-    x2 = x0%pix
-    y2 = y0%piy
+    x2 = x0 % pix
+    y2 = y0 % piy
     x3 = x2 + (x1-x0)
     y3 = y2 + (y1-y0)
     return([x2, x3, y2, y3])
 
 
-def display_image (file, x0, x1, y0, y1) :
+def display_image(file, x0, x1, y0, y1):
     """
     Display the RGB image with the position in file wanted.
 
@@ -232,7 +235,7 @@ def display_image (file, x0, x1, y0, y1) :
 
     N = final_array(file, x0, x1, y0, y1)
 
-    [x2,x3,y2,y3] = size_from_tiles (file, x0, x1, y0, y1)
+    [x2, x3, y2, y3] = size_from_tiles(file, x0, x1, y0, y1)
 
     N = N[y2:y3, x2:x3]
 
