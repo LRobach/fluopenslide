@@ -115,13 +115,13 @@ def final_array(file, x0, x1, y0, y1):
     ---------
     file : str
        The path to your czi file.
-    x0 : int
+    x0 : positive int
         The number of pixel on x axis at the beggining of the image wanted.
-    x1 : int
+    x1 : positive int
         The number of pixel on x axis at the end of the image wanted.
-    y0 : int
+    y0 : positive int
         The number of pixel on y axis at the beggining of the image wanted.
-    y1 : int
+    y1 : positive int
         The number of pixel on y axis at the end of the image wanted.
 
     Example
@@ -172,13 +172,13 @@ def size_from_tiles(file, x0, x1, y0, y1):
     ---------
     file : str
        The path to your czi file.
-    x0 : int
+    x0 : positive int
         The number of pixel on x axis at the beggining of the image wanted.
-    x1 : int
+    x1 : positive int
         The number of pixel on x axis at the end of the image wanted.
-    y0 : int
+    y0 : positive int
         The number of pixel on y axis at the beggining of the image wanted.
-    y1 : int
+    y1 : positive int
         The number of pixel on y axis at the end of the image wanted.
 
     Example
@@ -215,13 +215,13 @@ def display_image(file, x0, x1, y0, y1):
     ---------
     file : str
        The path to your czi file.
-    x0 : int
+    x0 : positive int
         The number of pixel on x axis at the beggining of the image wanted.
-    x1 : int
+    x1 : positive int
         The number of pixel on x axis at the end of the image wanted.
-    y0 : int
+    y0 : positive int
         The number of pixel on y axis at the beggining of the image wanted.
-    y1 : int
+    y1 : positive int
         The number of pixel on y axis at the end of the image wanted.
 
     Example

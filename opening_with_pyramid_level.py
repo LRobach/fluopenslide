@@ -52,15 +52,15 @@ def get_array(file, x0, x1, y0, y1, level):
     ---------
     file : str
        The path to your czi file.
-    x0 : int
+    x0 : positive int
         The number of pixel on x axis at the beggining of the image wanted.
-    x1 : int
+    x1 : positive int
         The number of pixel on x axis at the end of the image wanted.
-    y0 : int
+    y0 : positive int
         The number of pixel on y axis at the beggining of the image wanted.
-    y1 : int
+    y1 : positive int
         The number of pixel on y axis at the end of the image wanted.
-    level : int
+    level : positive int
         The level of the pyramid wanted. Between 0 and 1.
 
     Example
