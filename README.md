@@ -7,7 +7,9 @@ It is mainly based on the aicspylibczi library, whom documentation is available 
 
 # Installation
 
-You can install it directly from GitHut by downloading it here : <https://github.com/LRobach/fluopenslide/archive/refs/heads/master.zip>.
+You can install it with `pip install`. When you are in your terminal , just use `pip install fluopenslide` and it will install the whole library. You can then use it at your convenience.
+
+You can also install it directly from GitHut by downloading it here : <https://github.com/LRobach/fluopenslide/archive/refs/heads/master.zip>.
 
 # Documentation
 
