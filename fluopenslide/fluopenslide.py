@@ -4,9 +4,9 @@ import aicspylibczi
 from position_to_tile import size
 
 
-class KillOpenSlide():
+class FluOpenSlide():
     """
-    The KillOpenSlide object try to behave like the OpenSlide one.
+    The FluOpenSlide object try to behave like the OpenSlide one.
     The present functions have similar interests than OpenSlide ones,
     and so similar names.
     """
@@ -26,6 +26,7 @@ class KillOpenSlide():
         mosaic_file = pathlib.Path(self.path)
         czi = aicspylibczi.CziFile(mosaic_file)
         self.file = czi
+        self.fluo = True
 
     def data(self):
         """
@@ -60,13 +61,21 @@ class KillOpenSlide():
         L = []
         x, y = location
         w, h = size
-        for k in self.levels:
+        for k in self.levels():
             mosaic_data = self.file.read_mosaic(
                 (x, y, w, h), scale_factor=k, C=0
             )
             mosaic_data = mosaic_data[0, :, :]
             L.append(mosaic_data.shape)
         return(L)
+
+    def level_downsamples(self):
+        """
+        A list of downsample factors for each level of the slide.
+        level_downsamples[k] is the downsample factor of level k.
+
+        """
+        return sorted(2**k for k in range(10))
 
     def read_region(self, location, level, size):
         """

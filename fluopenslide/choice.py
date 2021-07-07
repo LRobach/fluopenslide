@@ -1,27 +1,14 @@
-from killopenslide import KillOpenSlide
+from fluopenslide import FluOpenSlide
 from openslide import OpenSlide
 import os
 from os.path import basename
+import matplotlib.pyplot as plt
 
 
 L = [
     '.mrxs', '.svs', '.tif', '.ndpi', '.vms', '.vmu',
     '.scn', '.tiff', '.svslide', '.bif'
 ]
-
-
-class OpenslideObject(Exception):
-    """
-    The object created can be opened with OpenSlide.
-    """
-    pass
-
-
-class KillOpenSlideObject(Exception):
-    """
-    The object created can be opened with KillOpenSlide.
-    """
-    pass
 
 
 class Unknown(Exception):
@@ -31,9 +18,9 @@ class Unknown(Exception):
     pass
 
 
-class choice(KillOpenSlide, OpenSlide):
+class choice(FluOpenSlide, OpenSlide):
     """
-    Decide witch program use between OpenSlide and KillOpenSlide.
+    Decide which program use between OpenSlide and FluOpenSlide.
 
     """
     def __init__(self, file, choice=None):
@@ -43,23 +30,25 @@ class choice(KillOpenSlide, OpenSlide):
         file : str
            The path to your czi file.
         choice : str
-            Have to be "KillOpenSlide" or "Openslide".
+            Have to be "FluOpenSlide" or "Openslide".
             If there is no choice, focus on the file extension.
         """
-        self.name, self.extension = os.path.splitext(file)
+        self._filename, self.extension = os.path.splitext(file)
 
-        if (choice == "KillOpenSlide" or choice == "killopenslide"):
-            KillOpenSlide.__init__(self, file)
-            self = KillOpenSlide(file)
-            raise KillOpenSlideObject(
-                'Le fichier est à présent un objet KillOpenSlide.'
+        if (choice == "FluOpenSlide" or choice == "fluopenslide"):
+            FluOpenSlide.__init__(self, file)
+            self = FluOpenSlide(file)
+            print(
+                'Le fichier est à présent un objet FluOpenSlide.'
             )
+            return(None)
         if (choice == "Openslide" or choice == "openslide"):
             OpenSlide.__init__(self, file)
             self = Openslide(file)
-            raise OpenslideObject(
+            print(
                 'Le fichier est à présent un objet OpenSlide.'
             )
+            return(None)
         if choice is None:
             print(
                 "Aucune ouverture spécifique du fichier"
@@ -68,13 +57,15 @@ class choice(KillOpenSlide, OpenSlide):
                 "nous allons nous baser sur l'extension du fichier."
             )
             if (self.extension == '.czi'):
-                KillOpenSlide.__init__(self, file)
-                self = KillOpenSlide(file)
-                raise KillOpenSlideObject("L'objet est un KillOpenSlide.")
+                FluOpenSlide.__init__(self, file)
+                self = FluOpenSlide(file)
+                print("L'objet est un FluOpenSlide.")
+                return(None)
             if (self.extension in L):
                 OpenSlide.__init__(self, file)
                 self = OpenSlide(file)
-                raise OpenslideObject("L'objet est un OpenSlide.")
+                print("L'objet est un OpenSlide.")
+                return(None)
             raise Unknown("Le type de fichier n'est pas ouvrable.")
         raise Unknown(
             "Aucune syntaxe n'a été reconnue."
