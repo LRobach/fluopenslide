@@ -1,0 +1,5 @@
+numpy
+aicspylibczi
+matplotlib
+pathlib
+aicsimageio

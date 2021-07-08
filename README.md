@@ -7,7 +7,7 @@ It is mainly based on the aicspylibczi library, whom documentation is available 
 
 # Installation
 
-You can install it with `pip install`. When you are in your terminal , just use `pip install fluopenslide` and it will install the whole library. You can then use it at your convenience.
+You can install it with `pip install`. When you are in your terminal , just use `pip install fluopenslide1` and it will install the whole library. You can then use it at your convenience.
 
 You can also install it directly from GitHut by downloading it here : <https://github.com/LRobach/fluopenslide/archive/refs/heads/master.zip>.
 
@@ -15,6 +15,6 @@ You can also install it directly from GitHut by downloading it here : <https://g
 
 Its documentation is available on <https://github.com/LRobach/fluopenslide>.
 
-# Current issue
+# fluopenslide package
 
-There is an issue on the image edges : it is currently not working when you want to open an image from one edge to another but we are working on it.
+Be carefull. The fluopenslide package is not working, you have to install the fluopenslide1 one.

@@ -1,0 +1,17 @@
+README.md
+setup.py
+fluopenslide1/__init__.py
+fluopenslide1/choice.py
+fluopenslide1/fluopenslide.py
+fluopenslide1/opening_tiles_RGB.py
+fluopenslide1/opening_tiles_non_RGB.py
+fluopenslide1/opening_with_pyramid_level.py
+fluopenslide1/openslide_or_fluopenslide.py
+fluopenslide1/position_to_tile.py
+fluopenslide1/wavelength_to_color.py
+fluopenslide1.egg-info/PKG-INFO
+fluopenslide1.egg-info/SOURCES.txt
+fluopenslide1.egg-info/dependency_links.txt
+fluopenslide1.egg-info/not-zip-safe
+fluopenslide1.egg-info/requires.txt
+fluopenslide1.egg-info/top_level.txt
