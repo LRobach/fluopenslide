@@ -6,7 +6,7 @@ fluopenslide/fluopenslide.py
 fluopenslide/opening_tiles_RGB.py
 fluopenslide/opening_tiles_non_RGB.py
 fluopenslide/opening_with_pyramid_level.py
-fluopenslide/openslide_or_killopenslide.py
+fluopenslide/openslide_or_fluopenslide.py
 fluopenslide/position_to_tile.py
 fluopenslide/wavelength_to_color.py
 fluopenslide.egg-info/PKG-INFO

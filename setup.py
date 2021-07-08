@@ -9,7 +9,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name="fluopenslide",
-    version="0.0.0",
+    version="0.0.1",
     description="Opening fluorescence .czi files",
     author="Louison Robach",
     author_email="louison.robach@gmail.com",
@@ -17,10 +17,10 @@ setup(
     zip_safe=False,
     install_requires=[
         "numpy",
-        "aicspylibczi"
-        "matplotlib"
-        "pathlib"
-        "xml"
+        "aicspylibczi",
+        "matplotlib",
+        "pathlib",
+        "xml",
         "aicsimageio"
     ],
     include_package_data=True,

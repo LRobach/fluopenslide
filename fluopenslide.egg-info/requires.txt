@@ -1,2 +1,6 @@
 numpy
-aicspylibczimatplotlibpathlibxmlaicsimageio
+aicspylibczi
+matplotlib
+pathlib
+xml
+aicsimageio
