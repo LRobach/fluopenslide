@@ -5,10 +5,9 @@ import pathlib
 import aicspylibczi
 from xml.etree.ElementTree import ElementTree
 import xml.etree.ElementTree as ET
-from typing import Tuple, List
 
 
-def size(file) -> Tuple[int, int]:
+def size(file):
     """
     Find the dimension of the entire czi image.
 
@@ -42,7 +41,7 @@ def size(file) -> Tuple[int, int]:
     return(L)
 
 
-def tiles_to_open(file, x0, x1, y0, y1) -> List:
+def tiles_to_open(file, x0, x1, y0, y1):
     """
     Create a list with the numbers of tiles to open.
 

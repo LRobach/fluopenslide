@@ -1,7 +1,5 @@
 "Opening a czi file with RGB colors and read_mosaic function."
 
-from position_to_tile import tiles_to_open
-import matplotlib.pyplot as plt
 import numpy as np
 import pathlib
 import aicspylibczi

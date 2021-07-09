@@ -1,7 +1,6 @@
 "Give the RGB color given by the wavelength."
 
-import xml.etree.ElementTree as ET
-from xml.etree.ElementTree import ElementTree
+from xml.etree.ElementTree import ElementTree as ET
 import pathlib
 import aicspylibczi
 
@@ -97,7 +96,7 @@ def get_the_wavelength(file, c):
     mosaic_file = pathlib.Path(file)
     czi = aicspylibczi.CziFile(mosaic_file)
     root = czi.meta
-    superroot = ElementTree(root)
+    superroot = ET(root)
     root = superroot.getroot()
 
     L = []

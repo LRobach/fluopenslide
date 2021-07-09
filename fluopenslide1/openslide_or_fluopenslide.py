@@ -1,7 +1,6 @@
 from fluopenslide import FluOpenSlide
 from openslide import OpenSlide
 import os
-from os.path import basename
 
 
 L = [
